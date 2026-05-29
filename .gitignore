@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -216,3 +217,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+=======
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.env
+.venv/
+venv/
+.env.local
+.vercel/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+>>>>>>> 4356672 (wave-1: baseline FastAPI incident lab for Reef demo)
