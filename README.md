@@ -47,6 +47,26 @@ curl -s -X POST "$BASE/auth/login" \
 Wave 2: repeat checkout curl 10–20 times to populate Sentry.  
 Wave 3: repeat login curl; expect 401 and a **new** Sentry issue (distinct from checkout TypeError).
 
+## Wave 2 — checkout regression (demo)
+
+**PR intent:** Document the wave-2 checkout incident for Reef/Coral correlation (GitHub merge → Vercel deploy → Sentry TypeError).
+
+After merging this PR to `main`:
+
+1. Set Vercel Production `DEPLOY_WAVE=2` and redeploy.
+2. Trigger errors:
+
+   ```bash
+   for i in $(seq 1 15); do
+     curl -s -o /dev/null -w "%{http_code}\n" -X POST "$BASE/checkout" \
+       -H "Content-Type: application/json" \
+       -d '{"cart_id":"demo-1","amount":null}'
+   done
+   ```
+
+3. In Sentry, expect **TypeError** on project `reef-incident-lab-api` (not necessarily “500” in the title).
+4. In Reef, investigate with the production deploy id + the Sentry issue numeric id from the Issues page.
+
 ## Local dev
 
 ```bash
